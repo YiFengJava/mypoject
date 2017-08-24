@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.mapper.ISysUserMapper">
+	
+	<!-- 数据库字段与bean中的字段对应的map -->
+	<resultMap type="com.jl.model.SysUserBean" id="userresultMap">
+		<id column="N_USERID" property="nuserid"/>
+		<result column="V_WORKID" property="vworkid"/>
+		<result column="V_USERNAME" property="vusername"/>
+		<result column="V_REALNAME" property="vrealname"/>
+		<result column="V_PASSWORD" property="vpassword"/>
+		<result column="V_SEX" property="vsex"/>
+		<result column="V_BIRTHPLACE" property="vbirthplace"/>
+		<result column="V_INDETIFICATION" property="vindetification"/>
+		<result column="N_TELPHONE" property="ntelphone"/>
+		<result column="V_EMAIL" property="vemail"/>
+		<result column="N_MOBILE" property="nmobile"/>
+		<result column="V_ADDRESS" property="vaddress"/>
+		<result column="D_REG" property="dreg"/>
+		<result column="V_FROZEN" property="vfrozen"/>		
+	</resultMap>
+	
+	<!-- 测试连接数据库，查询数据 -->
+	<select id="queryall" resultMap="userresultMap">
+		select *
+		from sys_user	
+	</select>
+	
+	<!-- 获取当前序列主键id-->
+	<select id="getseqsysuser" resultType="java.lang.Integer">
+		select SEQ_SYS_USER.CURRVAL from dual
+	</select>
+	
+	<!--出入综合查询-->
+	<select id="queryByParams" parameterType="com.jl.model.SysUserBean" resultMap="userresultMap">
+		select *
+		from sys_user
+		WHERE 1=1
+		<if test="nuserid!=null">
+			and N_USERID=#{nuserid}
+			</if>
+			<if test="vworkid!=null">
+			and V_WORKID=#{vworkid}
+			</if>
+			<if test="vusername!=null">
+			and V_USERNAME=#{vusername}
+			</if>
+			<if test="vrealname!=null">
+			and V_REALNAME=#{vrealname}
+			</if>
+			<if test="vpassword!=null">
+			and V_PASSWORD=#{vpassword}
+			</if>
+			<if test="vsex!=null">
+			and V_SEX=#{vsex}
+			</if>
+			<if test="vbirthplace!=null">
+			and V_BIRTHPLACE=#{vbirthplace}
+			</if>
+			<if test="vindetification!=null">
+			and V_INDETIFICATION=#{vindetification}
+			</if>
+			<if test="ntelphone!=null">
+			and N_TELPHONE=#{ntelphone}
+			</if>
+			<if test="vemail!=null">
+			and V_EMAIL=#{vemail}
+			</if>
+			<if test="nmobile!=null">
+			and N_MOBILE=#{nmobile}
+			</if>
+			<if test="vaddress!=null">
+			and V_ADDRESS=#{vaddress}
+			</if>
+			<if test="dreg!=null">
+			and D_REG=#{dreg}
+			</if>
+			<if test="vfrozen!=null">
+			and V_FROZEN=#{vfrozen}
+			</if> 	
+	</select>
+	
+	<!-- 增添用户 --> <!-- mysql可以用useGeneratedKeys="true" keyProperty="nuserid" oracle不行-->
+	<insert id="savesysuser" parameterType="com.jl.model.SysUserBean">
+	        insert into sys_user 
+	        <trim prefix="(" suffix=")" suffixOverrides="," >          	
+				N_USERID,
+				<if test="vworkid!=null">
+				V_WORKID,
+				</if>
+				<if test="vusername!=null">
+				V_USERNAME,
+				</if>
+				<if test="vrealname!=null">
+				V_REALNAME,
+				</if>
+				V_PASSWORD,	
+				<if test="vsex!=null">
+				V_SEX,
+				</if>
+				<if test="vbirthplace!=null">
+				V_BIRTHPLACE,	
+				</if>
+				<if test="vindetification!=null">
+				V_INDETIFICATION,
+				</if>
+				<if test="ntelphone!=null">
+				N_TELPHONE,
+				</if>
+				<if test="vemail!=null">
+				V_EMAIL,
+				</if>
+				<if test="nmobile!=null">
+				N_MOBILE,
+				</if>
+				<if test="vaddress!=null">
+				V_ADDRESS,
+				</if>			
+				D_REG,						
+				V_FROZEN							
+	        </trim>
+	         <trim prefix="values (" suffix=")" suffixOverrides="," >
+	         	<if test="nuserid==null">
+	         	SEQ_SYS_USER.NEXTVAL,
+	         	</if>
+				<if test="vworkid!=null">
+				#{vworkid},
+				</if>
+				<if test="vusername!=null">
+				#{vusername},
+				</if>
+				<if test="vrealname!=null">
+				#{vrealname},
+				</if>
+				'88888888',
+				<if test="vsex!=null">
+				#{vsex},
+				</if>
+				<if test="vbirthplace!=null">
+				#{vbirthplace},	
+				</if>
+				<if test="vindetification!=null">
+				#{vindetification},
+				</if>
+				<if test="ntelphone!=null">
+				#{ntelphone},
+				</if>
+				<if test="vemail!=null">
+				#{vemail},
+				</if>
+				<if test="nmobile!=null">
+				#{nmobile},
+				</if>
+				<if test="vaddress!=null">
+				#{vaddress},
+				</if>				
+				 sysdate,	
+				'0'		 				
+	         </trim>
+	</insert>
+	
+	<!-- 添加到中间表 -->
+	<insert id="savesysusersysrole" parameterType="int">
+		insert into SYS_USER_ROLE( N_USERID, N_ROLEID)values(#{nuserid},#{nroleid})
+	</insert>
+	
+<!-- 	//	省表GRP_PROVINCE
+//	Name	Code	Data Type
+//	省ID	PROVINCEID	NUMBER
+//	省编号	PROVINCECODE	VARCHAR2(3)
+//	省名称	PROVINCENAME	VARCHAR2(20)
+	private Integer provinceid;
+	private String provincecode;
+	private String provincename; -->
+	<!-- <resultMap id="ProvinceResultMap" type="com.jl.model.ProvinceBean">
+	  <id property="provinceid" column="PROVINCEID" />
+	  <result property="provincecode" column="PROVINCECODE"/>
+	  <result property="provincename" column="PROVINCENAME"/>
+	</resultMap> -->
+	
+	<!-- 查询所有的省份 -->
+	<select id="queryprovince" resultType="map" ><!-- java.util.HashMap resultMap="ProvinceResultMap" -->
+		select PROVINCEID,PROVINCECODE,PROVINCENAME
+		from GRP_PROVINCE
+	</select>
+	
+	<!-- 查询该省的城市-->
+	<select id="querycitybyprovinceid" resultType="map" parameterType="int">
+		select *
+		from GRP_CITY
+		where PROVINCEID = #{value}
+	</select>
+	
+	<!-- 查询该城市的所有区域-->
+	<select id="queryareabycityid" resultType="map" parameterType="int">
+		select *
+		from GRP_AREA
+		where CITYID = #{value}
+	</select>
+	
+	<!-- 可以带条件的分页查询 -->
+	<select id="queryByPagination" resultType="com.jl.model.SysUserBean" parameterType="com.jl.dto.SysUserContidionVO">
+		select *
+		from sys_user
+		where 1=1
+		<if test="user!=null">
+		and V_WORKID like '%'||#{user.vworkid}||'%'	
+		and V_USERNAME like '%'||#{user.vusername}||'%'	
+		</if>
+		<!-- <if test="vworkid!=null and vworkid!=''">
+		and V_WORKID like '%'||#{user.vworkid}||'%'		
+		</if>
+		<if test="vusername!=null and vusername!=''">
+		and V_USERNAME like '%'||#{user.vusername}||'%'		
+		</if> -->
+	</select>
+</mapper>

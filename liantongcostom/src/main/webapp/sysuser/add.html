@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+	 <script type="text/javascript" src="../myjs/basepath.js"></script>
+ 
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form class="definewidth m20">
+<table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <td width="10%" class="tableleft">用户名</td>
+        <td><input type="text" id="yusernameisone" name="vusername" /><span id="usernametishi"></span></td>
+        
+    </tr>
+    <tr>
+        <td class="tableleft">真实姓名</td>
+        <td><input type="text" id="yrealname" name="vrealname" /><span id="realnametishi"></span></td>
+    </tr>
+    <tr>
+        <td class="tableleft">性别</td>
+        <td><!-- <input type="text" name="realname"/> -->
+         <input type="radio" value="1" checked name="vsex"/>男
+           <input type="radio" value="0" name="vsex"/>女
+        </td>
+    </tr>
+    <tr>
+        <td class="tableleft">籍贯</td>
+        <td><!-- <input type="text" name="vbirthplace" id="vbirthplace"/> -->
+	        <select name="provinceid" id="provinceid" >
+				<option value="0">请选择省份</option>					     
+			</select>
+			
+			<select name="cityid" id="cityid" >
+				<option value="0">请选择城市</option>			     
+			</select>
+			
+			<select name="areaid" id="areaid" >
+				<option value="0">请选择区域</option>				     
+			</select>
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft">身份证</td>
+        <td>
+        	<input type="text" id="vindetification" name="vindetification"/>
+        	<span id="vindetificationtishi"></span>          
+        </td>
+    </tr>
+    <tr>
+        <td class="tableleft">电话</td>
+        <td>
+	        <input type="text" name="ntelphone" id="ntelphone"/>
+	        <span id="ntelphonetishi"></span> 
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft">手机号码</td>
+        <td>
+	        <input type="text" name="nmobile" id="nmobile"/>
+	        <span id="nmobiletishi"></span> 
+	       <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <button  type="button" id="getnmbilecode">获取验证码</button>&nbsp;&nbsp;&nbsp;<input style="width:80px"/>
+	       -->
+		</td>
+    </tr>
+     <tr>
+        <td class="tableleft">验证码</td>
+        <td>
+			 <input type="text" name="getcode" id="thecode"  style="width:80px"/>&nbsp;&nbsp;&nbsp;&nbsp;
+			 <input id="getnmbilecode" class="btn btn-primary" type="button" value="点击获取验证码"></input>
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft">电子邮件</td>
+        <td>
+			 <input type="email" name="vemail" id="vemail"/>
+			  <span id="emailtishi"></span> 
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft">地址</td>
+        <td>
+        	<select name="provinceid2" id="provinceid2" >
+				<option value="0">请选择省份</option>					     
+			</select>
+			
+			<select name="cityid2" id="cityid2" >
+				<option value="0">请选择城市</option>			     
+			</select>
+			
+			<select name="areaid2" id="areaid2" >
+				<option value="0">请选择区域</option>					     
+			</select>
+			<!-- <input type="text" name="vaddress" id="vaddress"/>  --> 
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft">工单号</td>  
+        <td>
+        	<input type="text" name="vworkid" id="vworkid"/>
+        	<span id="vworkidtishi"></span> 
+        </td>
+    </tr>
+    <tr>
+        <td class="tableleft">分配角色</td>
+        <td id="getroleselect">
+        	
+		</td>
+    </tr>
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <div class="btn btn-primary" id="sysusersave">保存</div> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button> &nbsp;&nbsp;
+        	<button type="reset" class="btn btn-primary" type="button">重置</button> &nbsp;&nbsp;
+        </td>
+    </tr>
+</table>
+</form>
+
+
+</body>
+</html>
+<script>
+    $(function () {  
+    	loadExtentFile("/sysuser/js/add.js","js")
+		$('#backid').click(function(){
+				window.location.href=basepath+'/sysuser/sysuser.html';
+		 });
+    	
+    });
+</script>

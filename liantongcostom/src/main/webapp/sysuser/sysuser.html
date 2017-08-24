@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+   <!-- <script type="text/javascript" src="../Js/jquery.sorted.js"></script> -->
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+    <script type="text/javascript" src="../myjs/basepath.js"></script>
+	<script type="text/javascript" >			
+		
+		loadExtentFile("/sysuser/js/sysuser.js","js")
+		
+	</script> 
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="index.html" method="get">  
+ 用户账号：
+    <input type="text" id="vworkid" class="abc input-default" placeholder="请输入用户账号" value="">&nbsp;&nbsp;   
+  用户名称：
+    <input type="text" id="vusername"class="abc input-default" placeholder="请输入用户名称" value="">&nbsp;&nbsp; 
+     <span style="color:blue">(*支持模糊查询)</span>&nbsp;&nbsp; &nbsp;&nbsp; 
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <button type="button" class="btn btn-success" id="addnew">新增用户</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10" id="sysuserdom">
+    <thead>
+    <tr>
+        <th>用户账号</th>
+        <th>用户名</th>
+        <th>真实姓名</th>
+        <th>性别</th>
+        <th>籍贯</th>
+        <th>身份证</th>
+        <th>电话号码</th>
+        <th>手机号码</th>
+        <th>邮箱</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+	    <!--  <tr>
+            <td>2</td>
+            <td>admin</td>
+            <td>管理员</td>
+            <td></td>
+            <td>
+                <a href="edit.html">编辑</a>                
+            </td>
+        </tr>	 -->
+</table>
+<div style="margin-top: 10px; margin-right: 20px;" align="right">
+        共有${pageModel.totalCount }<span></span>条记录，共${pageModel.pageCount }<span></span>页，每页
+      <select name="pageSize" onchange="changePageSize(this.value)" style="width: 50px;">
+          <option value="3" ${pageModel.pageSize==3?"selected":"" }>3</option>
+          <option value="5"  ${pageModel.pageSize==5?"selected":"" }>5</option>
+          <option value="10"  ${pageModel.pageSize==10?"selected":"" }>10</option>
+          <option value="100"   ${pageModel.pageSize==100?"selected":"" }>100</option>
+      </select>  
+        条记录，当前${pageModel.currentPage }<span></span>/${pageModel.pageCount }<span></span>页，
+    <a href="javascript:homePage()">首页</a>|
+    <a href="javascript:frontPage()">上一页</a>|
+    <a href="javascript:nextPage()">下一页</a>|
+    <a href="javascript:lastPage()">尾页</a>|
+    转到<select name="currentPage" onchange="goPage(this.value)" style="width: 50px;">
+       <c:forEach begin="1" end="${pageModel.pageCount }" var="i">
+          <option value=${i }  ${pageModel.currentPage==i?"selected":"" }>${i }</option>
+       </c:forEach>
+    </select>
+   </div>
+</body>
+</html>
+
+<script>
+    $(function () {
+
+		$('#addnew').click(function(){
+				window.location.href="add.html";
+		 });
+
+
+    });
+
+	function del(id)
+	{
+		
+		
+		if(confirm("确定要删除吗？"))
+		{
+		
+			var url = "index.html";
+			
+			window.location.href=url;		
+		
+		}
+	
+	
+	
+	
+	}
+</script>
