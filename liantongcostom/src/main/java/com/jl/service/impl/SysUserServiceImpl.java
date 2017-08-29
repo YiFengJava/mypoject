@@ -1,7 +1,7 @@
 package com.jl.service.impl;
 
 import java.util.List;
-import java.util.Map;
+
 
 import javax.annotation.Resource;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import com.jl.common.MyTools;
 import com.jl.dto.SysUserContidionVO;
 import com.jl.mapper.ISysUserMapper;
@@ -112,12 +113,19 @@ public class SysUserServiceImpl implements ISysUserService{
 
 	@Override
 	public PageInfo<SysUserBean> queryByPagination(SysUserContidionVO vo) {
-		System.out.println(vo.getPageNum());
-		System.out.println(vo.getPageSize());
+//		System.out.println(vo.getPageNum());
+//		System.out.println(vo.getPageSize());
 		PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
 		List<SysUserBean> list = sysuserMap.queryByPagination(vo);
 		PageInfo<SysUserBean> pageInfo = new PageInfo<>(list);
 		return pageInfo;
 	}
+//	@Override
+//	public PageInfo<Userbean> query(BaseContidionVO vo) {
+//		PageHelper.startPage(vo.getPageNum(), vo.getPageSize());
+//		List<Userbean> list = userMapper.query(vo);
+//		PageInfo<Userbean> pageInfo = new PageInfo<>(list);
+//		return pageInfo;
+//	}
 
 }

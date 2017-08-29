@@ -125,9 +125,18 @@ public class Test {
 	 	public void test7() {
  		ApplicationContext ac=new ClassPathXmlApplicationContext("spring/spring-context.xml"); 		
  		ISysUserService user=(ISysUserService) ac.getBean("sysUserServiceImpl");
- 		PageInfo<SysUserBean> bb = user.queryByPagination(new SysUserContidionVO());
+ 		SysUserBean u=new SysUserBean();
+ 		u.setVworkid("1s");
+ 		u.setNmobile("18086");
+ 		u.setVusername("yi");
+ 		SysUserContidionVO v = new SysUserContidionVO();
+ 		v.setUser(u);
+ 		PageInfo<SysUserBean> bb = user.queryByPagination(v);
  		System.out.println(new SysUserContidionVO().getPageSize());
 	 	List<SysUserBean> list = bb.getList();
+	 	for (SysUserBean object : list) {
+			System.out.println(object);
+		}
 	 	System.out.println(bb.getLastPage());
 	 	System.out.println(list.size());
 	 	}

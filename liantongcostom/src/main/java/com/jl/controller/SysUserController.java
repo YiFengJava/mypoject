@@ -146,6 +146,11 @@ public class SysUserController {
 	@RequestMapping("/queryByPagination")
 	@ResponseBody
 	public PageInfo<SysUserBean> queryByPagination(SysUserContidionVO vo){
-		return sysuseservice.queryByPagination(vo);
+		PageInfo<SysUserBean> thevo = sysuseservice.queryByPagination(vo);
+		List<SysUserBean> l = thevo.getList();
+		System.out.println("----------------------------------------------------");
+		System.out.println(l);
+		System.out.println("----------------------------------------------------");
+		return thevo;
 	}
 }

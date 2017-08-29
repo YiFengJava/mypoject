@@ -164,7 +164,13 @@ $(document).ready(function(){/*1*/
 	      }/*3*/
 	});/*2*/
 	$.ajax({
-		
+		async:true,
+		type:"POST",		
+		url:basepath+"/sysuser//queryByPagination",		
+		success: function(date){
+			var l=date.list;
+			debugger;
+		}
 	})
 	
 })/*1*/
